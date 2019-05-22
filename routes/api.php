@@ -48,16 +48,16 @@ Route::get('/users','UserController@index')
     ->name('api.users.all');
 
     //Get one user by ID
-Route::get('/user/{id}','UserController@show')
+Route::get('/users/{id}','UserController@show')
     ->name('api.user.id');
 
     //Add a user
-Route::post('/user','UserController@create')
+Route::post('/users','UserController@create')
     ->name('api.user.add');
 
 
     //Put a user
-Route::put('/user', 'UserController@update')
+Route::put('/users', 'UserController@update')
     ->name('api.user.put');
 
     //Patch a user
@@ -65,7 +65,7 @@ Route::put('/user', 'UserController@update')
 //     ->name('api.user.patch');
 
     //Delete a user
-Route::delete('/user','UserController@delete')
+Route::delete('/users','UserController@delete')
     ->name('api.user.del');   
 
 
@@ -80,16 +80,16 @@ Route::delete('/user','UserController@delete')
     ->name('api.ticket.all');
 
     //Get one ticket by ID
-Route::get('/ticket/{id}','TicketController@show')
+Route::get('/tickets/{id}','TicketController@show')
     ->name('api.ticket.id');
 
     //Add a ticket
-Route::post('/ticket','TicketController@create')
+Route::post('/tickets','TicketController@create')
     ->name('api.ticket.add');
 
 
     //Put a ticket
-Route::put('/ticket', 'TicketController@update')
+Route::put('/tickets', 'TicketController@update')
     ->name('api.ticket.put');
 
     //Patch a ticket
@@ -97,7 +97,7 @@ Route::put('/ticket', 'TicketController@update')
 //     ->name('api.ticket.patch');
 
     //Delete a ticket
-Route::delete('/ticket','TicketController@delete')
+Route::delete('/tickets','TicketController@delete')
     ->name('api.ticket.del');
 
 
@@ -110,16 +110,16 @@ Route::delete('/ticket','TicketController@delete')
     ->name('api.comment.all');
 
     //Get one comment by ID
-Route::get('/comment/{id}','CommentController@show')
+Route::get('/comments/{id}','CommentController@show')
     ->name('api.comment.id');
 
     //Add a comment
-Route::post('/comment','CommentController@create')
+Route::post('/comments','CommentController@create')
     ->name('api.comment.add');
 
 
     //Put a comment
-Route::put('/comment', 'CommentController@update')
+Route::put('/comments', 'CommentController@update')
     ->name('api.comment.put');
 
     //Patch a comment
@@ -127,5 +127,5 @@ Route::put('/comment', 'CommentController@update')
 //     ->name('api.comment.patch');
 
     //Delete a comment
-Route::delete('/comment','CommentController@delete')
+Route::delete('/comments','CommentController@delete')
     ->name('api.comment.del');

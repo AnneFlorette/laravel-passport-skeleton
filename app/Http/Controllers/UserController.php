@@ -21,7 +21,7 @@ class UserController extends BaseController
         $user = User::findorfail($id);
         return response()->json([
             'name' => $user->name,
-            'email' => $user->email,
+            'email' => $user->email
         ]);
     }
 
@@ -36,7 +36,7 @@ class UserController extends BaseController
     {
         $user = new User();
 
-        if(($request->input('name')) && ($request->input('email')) && ($request->input('password')))
+        if(($request->input('name') !== null)  && ($request->input('email') !== null) && ($request->input('password') !== null))
         {
             $user->name = $request->input('name');
             $user->email = $request->input('email');
@@ -49,7 +49,7 @@ class UserController extends BaseController
     {
         $user = new User();
 
-        if(($request->input('name')) && ($request->input('email')) && ($request->input('password')))
+        if(($request->input('name') !== null) && ($request->input('email') !== null) && ($request->input('password') !== null))
         {
             $user->name = $request->input('name');
             $user->email = $request->input('email');

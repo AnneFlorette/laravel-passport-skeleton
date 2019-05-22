@@ -12,8 +12,8 @@ class Ticket extends Model
     protected $table = 'tickets';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = ['title', 'content', 'user_id', 'user_id_assigned', 'state', 'priority', 'first_assignation', 'last_assignation'];
-
+    protected $fillable = ['title', 'content', 'user_id', 'user_id_assigned', 'state', 'priority'];
+    protected $casts = [ 'first_assignation' => 'datetime', 'last_assignation' => 'datetime'];
 
     public function comments()
     {

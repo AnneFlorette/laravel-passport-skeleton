@@ -57,7 +57,7 @@ Route::post('/users','UserController@create')
 
 
     //Put a user
-Route::put('/users', 'UserController@update')
+Route::put('/users/{id}', 'UserController@update')
     ->name('api.user.put');
 
     //Patch a user
@@ -65,7 +65,7 @@ Route::put('/users', 'UserController@update')
 //     ->name('api.user.patch');
 
     //Delete a user
-Route::delete('/users','UserController@delete')
+Route::delete('/users/{id}','UserController@delete')
     ->name('api.user.del');   
 
 
@@ -89,7 +89,7 @@ Route::post('/tickets','TicketController@create')
 
 
     //Put a ticket
-Route::put('/tickets', 'TicketController@update')
+Route::put('/tickets/{id}', 'TicketController@update')
     ->name('api.ticket.put');
 
     //Patch a ticket
@@ -97,7 +97,7 @@ Route::put('/tickets', 'TicketController@update')
 //     ->name('api.ticket.patch');
 
     //Delete a ticket
-Route::delete('/tickets','TicketController@delete')
+Route::delete('/tickets/{id}','TicketController@delete')
     ->name('api.ticket.del');
 
 
@@ -119,7 +119,7 @@ Route::post('/comments','CommentController@create')
 
 
     //Put a comment
-Route::put('/comments', 'CommentController@update')
+Route::put('/comments/{id}', 'CommentController@update')
     ->name('api.comment.put');
 
     //Patch a comment
@@ -127,5 +127,5 @@ Route::put('/comments', 'CommentController@update')
 //     ->name('api.comment.patch');
 
     //Delete a comment
-Route::delete('/comments','CommentController@delete')
+Route::delete('/comments/{id}','CommentController@delete')
     ->name('api.comment.del');

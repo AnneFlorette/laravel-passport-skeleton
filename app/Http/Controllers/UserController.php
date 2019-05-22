@@ -20,8 +20,7 @@ class UserController extends BaseController
     {
         $user = User::findorfail($id);
         return response()->json([
-            'name' => $user->name,
-            'email' => $user->email
+            $user
         ]);
     }
 
@@ -45,9 +44,9 @@ class UserController extends BaseController
         }
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $user = new User();
+        $user = User::findorfail($id);
 
         if(($request->input('name') !== null) && ($request->input('email') !== null) && ($request->input('password') !== null))
         {
@@ -61,17 +60,13 @@ class UserController extends BaseController
     public function delete($id)
     {
         $user = User::findorfail($id);
-        $ticket = Ticket::where('user_id', $id);
-        $comment = Comment::where('user_id', $id);
 
-        $comment->delete();
-        $ticket->delete();
         $user->delete();
     }
 
     public function emailVerified($id)
     {
-        $user = new User();
+        $user = User::findorfail($id);
 
         $user->email_verified_at = date('Y-m-d H:i:s');
     }

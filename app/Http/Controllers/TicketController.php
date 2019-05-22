@@ -18,13 +18,7 @@ class TicketController extends BaseController
     {
         $ticket = Ticket::findorfail($id);
         return response()->json([
-            'title' => $ticket->title,
-            'content' => $ticket->content,
-            'state' => $ticket->state,
-            'priority'=> $ticket->priority,
-            'last_assignation'=> $ticket->last_assignation,
-            'id_creator'=> $ticket->id_user,
-            'id_user_assigned' => $ticket->id_user_assigner
+            $ticket
         ]);
     }
 
@@ -51,5 +45,26 @@ class TicketController extends BaseController
         }
     }
 
+    public function update(Request $request, $id)
+    {
+        $ticket = User::findorfail($id);
+
+        if(($request->input('title') !== null) && ($request->input('priority') !== null) && ($request->input('state') !== null))
+        {
+            $ticket->title = $request->input('title');
+            $ticket->priority = $request->input('priority');
+            $ticket->state = Hash::make($request->input('state'));
+            $ticket->content = $request->input('content');
+            $ticket->user_id_assigned = User::where('name', $request->input('assigned_email'));
+            $user->save();
+        }
+    }
+
+    public function delete($id)
+    {
+        $ticket = User::findorfail($id);
+
+        $ticket->delete();
+    }
 
 }

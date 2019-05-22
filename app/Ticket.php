@@ -2,33 +2,29 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Laravel\Passport\HasApiTokens;
-
-class Ticket extends Article
+class Ticket extends Model
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable;
 
     protected $table = 'tickets';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $softDelete = false;
     protected $fillable = ['title', 'content', 'user_id', 'user_id_assigned', 'state', 'priority', 'first_assignation', 'last_assignation'];
 
 
     public function comments()
     {
-        return $this->HasMany('App\Models\Comment');
+        return $this->HasMany('App\Comment');
     }
     public function creator()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo('App\User', 'user_id');
     }
     public function assigner()
     {
-        return $this->belongsTo('App\Models\User', 'user_id_assigned');
+        return $this->belongsTo('App\User', 'user_id_assigned');
     }
 }

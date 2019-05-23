@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\database\factories\UserFactory;
 use App\Http\Middleware\Authenticate as auth;
+use Illuminate\Http\Request;
 use App\User;
 use App\Ticket;
 use App\Comment;

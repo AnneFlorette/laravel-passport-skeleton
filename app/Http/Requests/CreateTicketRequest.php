@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DestroyUserRequest extends FormRequest
+class CreateTicketRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class DestroyUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return !!$this->user();
+        return !$this->user();
     }
 
     /**
@@ -24,7 +24,9 @@ class DestroyUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|string|max:255',
+            'priority' => 'required|int',
+            'state' => 'required|string|max:255'
         ];
     }
 }

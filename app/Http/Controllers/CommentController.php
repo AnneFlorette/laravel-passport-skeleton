@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Ticket;
 use App\Comment;
-use App\Http\Request\CreateCommentRequest;
-use App\Http\Request\UpdateCommentRequest;
-use App\Http\Request\DestroyCommentRequest;
+use App\Http\Requests\CreateCommentRequest;
+use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Requests\DestroyCommentRequest;
 
 class CommentController extends BaseController
 {

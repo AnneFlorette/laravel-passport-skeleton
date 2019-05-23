@@ -53,7 +53,7 @@ class CommentController extends BaseController
 
         $comment->content = $input->content;
         $comment->save();
-        return response(null, '404');
+        return response(null, '204');
     }
 
     public function delete(DestroyCommentRequest $request, $id)

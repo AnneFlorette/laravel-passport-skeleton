@@ -16,6 +16,7 @@ use App\Comment;
 
 use App\Http\Requests\CreateTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use App\Http\Requests\DestroyTicketRequest;
 
 class TicketController extends BaseController
 {
@@ -39,21 +40,19 @@ class TicketController extends BaseController
         $input = (object) $request->validated();
         $ticket = new Ticket();
 
-        if(($request->input('title') !== null) && ($request->input('priority') !== null) && ($request->input('state') !== null) && ($request->input('user_id')))
-        {
-            $ticket->title = $request->input('title');
-            $ticket->priority = $request->input('priority');
-            $ticket->state = $request->input('state');
-            $ticket->user_id = $request->input('user_id');
-            if($request->input('content'))
-                $ticket->content = $request->input('content');
-            if($request->input('user_id_assigned')) {
-                $ticket->user_id_assigned = $request->input('user_id_assigned');
+            $ticket->title = $input->title;
+            $ticket->priority = $input->priority;
+            $ticket->state = $input->state;
+            $ticket->user_id = $input->user_id;
+            if($input->content)
+                $ticket->content = $input->content;
+            if($input->user_id_assigned) {
+                $ticket->user_id_assigned = $input->user_id_assigned;
                 $ticket->first_assignation = now();
                 $ticket->last_assignation = now();
             }
             $ticket->save();
-        }
+
     }
 
     public function update(UpdateTicketRequest $request, $id)
@@ -61,21 +60,22 @@ class TicketController extends BaseController
         $input = (object) $request->validated();
         $ticket = Ticket::findorfail($id);
 
-            $ticket->title = $request->input('title');
-            $ticket->priority = $request->input('priority');
-            $ticket->state = $request->input('state');
-            if($request->input('content'))
-                $ticket->content = $request->input('content');
-            if($request->input('user_id_assigned')) {
-                $ticket->user_id_assigned = $request->input('user_id_assigned');
+            $ticket->title = $input->title;
+            $ticket->priority = $input->priority;
+            $ticket->state = $input->state;
+            if($input->content)
+                $ticket->content = $input->content;
+            if($input->user_id_assigned) {
+                $ticket->user_id_assigned = $input->user_id_assigned;
                 $ticket->last_assignation = now();
             }
             $ticket->save();
     }
 
-    public function delete($id)
+    public function delete(DestroyTicketRequest $request, $id)
     {
-        $ticket = User::findorfail($id);
+        $input = (object) $request->validated();
+        $ticket = Ticket::findorfail($id);
 
         $ticket->delete();
     }

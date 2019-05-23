@@ -43,8 +43,8 @@ class TicketController extends BaseController
             $ticket->user_id = $request->input('user_id');
             if($request->input('content'))
                 $ticket->content = $request->input('content');
-            if($request->input('assigned_mail'))
-                $ticket->user_id_assigned = User::where('name', $request->input('assigned_email'));
+            if($request->input('user_id_assigned'))
+                $ticket->user_id_assigned = User::where('id', $request->input('user_id_assigned'));
             $ticket->save();
         }
     }
@@ -60,8 +60,8 @@ class TicketController extends BaseController
             $ticket->state = $request->input('state');
             if($request->input('content'))
                 $ticket->content = $request->input('content');
-            if($request->input('assigned_mail'))
-                $ticket->user_id_assigned = User::where('name', $request->input('assigned_email'));
+            if($request->input('user_id_assigned'))
+                $ticket->user_id_assigned = User::where('id', $request->input('user_id_assigned'));
             $user->save();
         }
     }

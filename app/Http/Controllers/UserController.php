@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\database\factories\UserFactory;
 use App\Http\Middleware\Authenticate as auth;
+
 use App\User;
 use App\Ticket;
 use App\Comment;
+
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\DestroyUserRequest;
 
 class UserController extends BaseController
 {
@@ -33,36 +38,33 @@ class UserController extends BaseController
         ]);
     }
 
-    public function create(Request $request)
+    public function create(CreateUserRequest $request)
     {
+        $input = (object) $request->validated();
         $user = new User();
 
-        if(($request->input('name') !== null)  && ($request->input('email') !== null) && ($request->input('password') !== null))
-        {
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $user->password = Hash::make($request->input('password'));
-            $user->save();
-        }
+        $user->name = $input->name;
+        $user->email = $input->email;
+        $user->password = Hash::make($input->password);
+        $user->save();
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
+        $input = (object) $request->validated();
         $user = User::findorfail($id);
 
-        if(($request->input('name') !== null) && ($request->input('email') !== null) && ($request->input('password') !== null))
-        {
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $user->password = Hash::make($request->input('password'));
+            $user->name = $input->name;
+            $user->email = $input->email;
+            $user->password = Hash::make($input->password);
             $user->save();
-        }
     }
 
-    public function delete($id)
+    public function delete(DestroyUserRequest $request, $id)
     {
+        $input = (object) $request->validated();
         $user = User::findorfail($id);
-
+        
         $user->delete();
     }
 

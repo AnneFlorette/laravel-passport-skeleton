@@ -26,16 +26,16 @@ class TicketController extends BaseController
     public function show($id)
     {
         $ticket = Ticket::findorfail($id);
-        return response()->json([
+        return response()->json(
             $ticket
-        ]);
+        );
     }
 
     public function index()
     {
-        return response()->json([
-            'ticket' => Ticket::all()
-        ]);
+        return response()->json(
+            Ticket::all()
+        );
     }
 
     public function create(CreateTicketRequest $request)
@@ -55,6 +55,7 @@ class TicketController extends BaseController
             $ticket->last_assignation = now();
         }
         $ticket->save();
+        return response(null, '204');
 
     }
 
@@ -75,6 +76,7 @@ class TicketController extends BaseController
             $ticket->last_assignation = now();
         }
         $ticket->save();
+        return response(null, '204');
     }
 
     public function delete(DestroyTicketRequest $request, $id)
@@ -83,6 +85,7 @@ class TicketController extends BaseController
         $ticket = Ticket::findorfail($id);
 
         $ticket->delete();
+        return response(null, '204');
     }
 
     public function listTicketCreatedByActualUser(GetTicketCreatedByUserRequest $request, $id){

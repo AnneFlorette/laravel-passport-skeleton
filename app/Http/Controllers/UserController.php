@@ -27,16 +27,14 @@ class UserController extends BaseController
     public function show($id)
     {
         $user = User::findorfail($id);
-        return response()->json([
-            $user
-        ]);
+        return $user;
     }
 
     public function index()
     {
-        return response()->json([
-            'user' => User::all()
-        ]);
+        return response()->json(
+            User::all()
+        );
     }
 
     public function create(Request $request)
@@ -50,6 +48,7 @@ class UserController extends BaseController
         $user->remember_token = Str::random(10);
         $user->email_verified_at = now();
         $user->save();
+        return response(null, '204');
     }
 
     public function update(UpdateUserRequest $request, $id)
@@ -61,6 +60,7 @@ class UserController extends BaseController
             $user->email = $input->email;
             $user->password = Hash::make($input->password);
             $user->save();
+            return response(null, '204');
     }
 
     public function delete(DestroyUserRequest $request, $id)
@@ -69,6 +69,7 @@ class UserController extends BaseController
         $user = User::findorfail($id);
 
         $user->delete();
+        return response(null, '204');
     }
 
     public function emailVerified($id)
@@ -76,5 +77,6 @@ class UserController extends BaseController
         $user = User::findorfail($id);
 
         $user->email_verified_at = date('Y-m-d H:i:s');
+        return response(null, '204');
     }
 }

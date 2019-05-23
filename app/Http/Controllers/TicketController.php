@@ -18,6 +18,8 @@ use App\Comment;
 use App\Http\Requests\CreateTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Http\Requests\DestroyTicketRequest;
+use App\Http\Requests\GetTicketAssignedByUserRequest;
+use App\Http\Requests\GetTicketCreatedByUserRequest;
 
 class TicketController extends BaseController
 {
@@ -83,4 +85,22 @@ class TicketController extends BaseController
         $ticket->delete();
     }
 
+    public function listTicketCreatedByActualUser(GetTicketCreatedByUserRequest $request, $id){
+        
+        $input = (object) $request->validated();
+
+        $tickets = Ticket::where('user_id', $id);
+
+        return $tickets;
+    }
+
+
+    public function listTicketAssignedByActualUser(GetTicketAssignedByUserRequest $request, $id){
+
+        $input = (object) $request->validated();
+
+        $tickets = Ticket::where('user_id_assigned', $id);
+
+        return $tickets;
+    }
 }

@@ -105,6 +105,15 @@ Route::middleware('auth:api')
     ->delete('/tickets/{id}','TicketController@delete')
     ->name('api.ticket.del');
 
+    //Get ticket for actual user
+Route::middleware('auth:api')
+    ->get('/tickets/created','TicketController@listTicketCreatedByActualUser')
+    ->name('api.ticket.getbycreated');
+
+    //Get users for actual ticket
+Route::middleware('auth:api')
+    ->get('/tickets/assigned/','TicketController@listTicketAssignedByActualUser')
+    ->name('api.ticket.getbyassigned');
 
 //--------------------------------------
 // Routes Commentaires

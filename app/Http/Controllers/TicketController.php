@@ -43,15 +43,18 @@ class TicketController extends BaseController
             $ticket->user_id = $request->input('user_id');
             if($request->input('content'))
                 $ticket->content = $request->input('content');
-            if($request->input('user_id_assigned'))
-                $ticket->user_id_assigned = User::where('id', $request->input('user_id_assigned'));
+            if($request->input('user_id_assigned')) {
+                $ticket->user_id_assigned = $request->input('user_id_assigned');
+                $ticket->first_assignation = now();
+                $ticket->last_assignation = now();
+            }
             $ticket->save();
         }
     }
 
     public function update(Request $request, $id)
     {
-        $ticket = User::findorfail($id);
+        $ticket = Ticket::findorfail($id);
 
         if(($request->input('title') !== null) && ($request->input('priority') !== null) && ($request->input('state') !== null))
         {
@@ -60,9 +63,11 @@ class TicketController extends BaseController
             $ticket->state = $request->input('state');
             if($request->input('content'))
                 $ticket->content = $request->input('content');
-            if($request->input('user_id_assigned'))
-                $ticket->user_id_assigned = User::where('id', $request->input('user_id_assigned'));
-            $user->save();
+            if($request->input('user_id_assigned')) {
+                $ticket->user_id_assigned = $request->input('user_id_assigned');
+                $ticket->last_assignation = now();
+            }
+            $ticket->save();
         }
     }
 

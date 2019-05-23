@@ -35,14 +35,16 @@ class TicketController extends BaseController
     {
         $ticket = new Ticket();
 
-        if(($request->input('title') !== null) && ($request->input('priority') !== null) && ($request->input('state') !== null))
+        if(($request->input('title') !== null) && ($request->input('priority') !== null) && ($request->input('state') !== null) && ($request->input('user_id')))
         {
             $ticket->title = $request->input('title');
             $ticket->priority = $request->input('priority');
             $ticket->state = $request->input('state');
-            $ticket->user_id = auth::user()->id;
-            $ticket->content = $request->input('content');
-            $ticket->user_id_assigned = User::where('name', $request->input('assigned_email'));
+            $ticket->user_id = $request->input('user_id');
+            if($request->input('content'))
+                $ticket->content = $request->input('content');
+            if($request->input('assigned_mail'))
+                $ticket->user_id_assigned = User::where('name', $request->input('assigned_email'));
             $ticket->save();
         }
     }
@@ -56,8 +58,10 @@ class TicketController extends BaseController
             $ticket->title = $request->input('title');
             $ticket->priority = $request->input('priority');
             $ticket->state = $request->input('state');
-            $ticket->content = $request->input('content');
-            $ticket->user_id_assigned = User::where('name', $request->input('assigned_email'));
+            if($request->input('content'))
+                $ticket->content = $request->input('content');
+            if($request->input('assigned_mail'))
+                $ticket->user_id_assigned = User::where('name', $request->input('assigned_email'));
             $user->save();
         }
     }

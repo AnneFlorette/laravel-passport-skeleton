@@ -44,9 +44,9 @@ class TicketController extends BaseController
             $ticket->priority = $input->priority;
             $ticket->state = $input->state;
             $ticket->user_id = $input->user_id;
-            if($input->content)
+            if(isset($input->content))
                 $ticket->content = $input->content;
-            if($input->user_id_assigned) {
+            if(isset($input->user_id_assigned)) {
                 $ticket->user_id_assigned = $input->user_id_assigned;
                 $ticket->first_assignation = now();
                 $ticket->last_assignation = now();
@@ -63,17 +63,20 @@ class TicketController extends BaseController
             $ticket->title = $input->title;
             $ticket->priority = $input->priority;
             $ticket->state = $input->state;
-            if($input->content)
+            if(isset($input->content))
                 $ticket->content = $input->content;
-            if($input->user_id_assigned) {
+            if(isset($input->user_id_assigned)) {
                 $ticket->user_id_assigned = $input->user_id_assigned;
+                if($ticket->first_assignation == null)
+                    $ticket->first_assignation = now();
                 $ticket->last_assignation = now();
             }
             $ticket->save();
     }
 
-    public function delete(DestroyTicketRequest $request, $id)
+    public function delete(DestroyTicketRequest $request)
     {
+        $id = $request->route('id');
         $input = (object) $request->validated();
         $ticket = Ticket::findorfail($id);
 

@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\database\factories\UserFactory;
 use App\Http\Middleware\Authenticate as auth;
@@ -46,6 +47,8 @@ class UserController extends BaseController
         $user->name = $input->name;
         $user->email = $input->email;
         $user->password = Hash::make($input->password);
+        $user->remember_token = Str::random(10);
+        $user->email_verified_at = now();
         $user->save();
     }
 
@@ -64,7 +67,7 @@ class UserController extends BaseController
     {
         $input = (object) $request->validated();
         $user = User::findorfail($id);
-        
+
         $user->delete();
     }
 

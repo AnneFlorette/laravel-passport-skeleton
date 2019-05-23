@@ -52,8 +52,7 @@ Route::get('/users/{id}','UserController@show')
     ->name('api.user.id');
 
     //Add a user
-Route::middleware('auth:api')
-    ->post('/users','UserController@create')
+Route::post('/users','UserController@create')
     ->name('api.user.add');
 
 

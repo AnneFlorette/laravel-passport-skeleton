@@ -13,7 +13,7 @@ class UpdateTicketRequest extends FormRequest
      */
     public function authorize()
     {
-        return !$this->user();
+        return !!$this->user();
     }
 
     /**
@@ -26,7 +26,10 @@ class UpdateTicketRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'priority' => 'required|int',
-            'state' => 'required|string|max:255'
+            'state' => 'required|string|max:255',
+            'user_id' => 'int',
+            'content' => 'nullable|string|max:255',
+            'user_id_assigned' => 'nullable|int'
         ];
     }
 }

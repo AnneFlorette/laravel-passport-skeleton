@@ -7,11 +7,15 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\database\factories\UserFactory;
+use Illuminate\Support\Facades\Auth as currentUser;
 use App\Http\Middleware\Authenticate as auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Ticket;
 use App\Comment;
+use App\Http\Request\CreateCommentRequest;
+use App\Http\Request\UpdateCommentRequest;
+use App\Http\Request\DestroyCommentRequest;
 
 class CommentController extends BaseController
 {
@@ -31,32 +35,29 @@ class CommentController extends BaseController
         ]);
     }
 
-    public function create(Request $request)
+    public function create(CreateCommentRequest $request)
     {
+        $input = (object) $request->validated();
         $comment = new Comment();
 
-        if(($comment->input('content') !== null))
-        {
-            $comment->content = $request->input('content');
-            $comment->ticket_id = $request->input('ticket_id');
-            $comment->user_id = auth::user()->id;
-            $comment->save();
-        }
+        $comment->content = $input->content;
+        $comment->ticket_id = $input->ticket_id;
+        $comment->user_id = currentUser::user()->id;
+        $comment->save();
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateCommentRequest $request, $id)
     {
-        $comment = User::findorfail($id);
+        $input = (object) $request->validated();
+        $comment = Comment::findorfail($id);
 
-        if(($comment->input('content') !== null))
-        {
-            $comment->content = $request->input('content');
-            $comment->save();
-        }
+        $comment->content = $input->content;
+        $comment->save();
     }
 
-    public function delete($id)
+    public function delete(DestroyCommentRequest $request, $id)
     {
+        $input = (object) $request->validated();
         $comment = Comment::findorfail($id);
 
         $comment->delete();

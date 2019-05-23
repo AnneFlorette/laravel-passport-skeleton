@@ -13,7 +13,7 @@ class CreateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return !$this->user();
+        return !!$this->user();
     }
 
     /**

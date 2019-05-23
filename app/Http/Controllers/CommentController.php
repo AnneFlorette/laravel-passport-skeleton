@@ -24,7 +24,6 @@ class CommentController extends BaseController
         $comment = Comment::findorfail($id);
         return response()->json([
             $comment
-
         ]);
     }
 
@@ -44,6 +43,7 @@ class CommentController extends BaseController
         $comment->ticket_id = $input->ticket_id;
         $comment->user_id = currentUser::user()->id;
         $comment->save();
+        return response(null, '204');
     }
 
     public function update(UpdateCommentRequest $request, $id)
@@ -53,6 +53,7 @@ class CommentController extends BaseController
 
         $comment->content = $input->content;
         $comment->save();
+        return response(null, '404');
     }
 
     public function delete(DestroyCommentRequest $request, $id)
@@ -61,6 +62,7 @@ class CommentController extends BaseController
         $comment = Comment::findorfail($id);
 
         $comment->delete();
+        return response(null, '204');
     }
 
 }

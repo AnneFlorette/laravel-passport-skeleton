@@ -70,6 +70,8 @@ Route::middleware('auth:api')
     ->delete('/users/{id}','UserController@delete')
     ->name('api.user.del');
 
+Route::post('/users/{id}/verified', 'UserController@emailVerified')
+    ->name('api.user.verif');
 
 
 

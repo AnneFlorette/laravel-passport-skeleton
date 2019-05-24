@@ -22,14 +22,15 @@ use App\Http\Requests\DestroyUserRequest;
 
 class UserController extends BaseController
 {
-    //use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    //fonction pour GET 1 utilisateur en utilisant son id
     public function show($id)
     {
         $user = User::findorfail($id);
         return $user;
     }
 
+    //fonction pour GET tous les utilisateurs
     public function index()
     {
         return response()->json(
@@ -37,9 +38,9 @@ class UserController extends BaseController
         );
     }
 
+    //fonction POST pour ajouter 1 utilisateur
     public function create(Request $request)
     {
-        // $input = (object) $request->validated();
         $user = new User();
 
         $user->name = $request->input('name');
@@ -51,6 +52,7 @@ class UserController extends BaseController
         return response(null, '204');
     }
 
+    //fonction PUT pour modifier 1 ou plusieurs données d'un utilisateur en utilisant son id
     public function update(UpdateUserRequest $request, $id)
     {
         $input = (object) $request->validated();
@@ -63,6 +65,7 @@ class UserController extends BaseController
             return response(null, '204');
     }
 
+    //fonction DELETE pour supprimer 1 utilisateur en utilisant son id
     public function delete(DestroyUserRequest $request, $id)
     {
         $input = (object) $request->validated();
@@ -72,6 +75,7 @@ class UserController extends BaseController
         return response(null, '204');
     }
 
+    //fonction POST pour ajouter dans la base la date à laquelle le mail à été vérifier
     public function emailVerified($id)
     {
         $user = User::findorfail($id);

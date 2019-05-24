@@ -19,6 +19,7 @@ use App\Http\Requests\DestroyCommentRequest;
 
 class CommentController extends BaseController
 {
+    //fonction pour GET 1 commentaire en utilisant son id
     public function show($id)
     {
         $comment = Comment::findorfail($id);
@@ -27,6 +28,7 @@ class CommentController extends BaseController
         ]);
     }
 
+    //fonction pour GET tous les commentaires
     public function index()
     {
         return response()->json([
@@ -34,6 +36,7 @@ class CommentController extends BaseController
         ]);
     }
 
+    //fonction POST pour ajouter 1 commentaire
     public function create(CreateCommentRequest $request)
     {
         $input = (object) $request->validated();
@@ -46,6 +49,7 @@ class CommentController extends BaseController
         return response(null, '204');
     }
 
+    //fonction PUT pour modifier 1 ou plusieurs données d'un commentaire en utilisant son id
     public function update(UpdateCommentRequest $request, $id)
     {
         $input = (object) $request->validated();
@@ -56,6 +60,7 @@ class CommentController extends BaseController
         return response(null, '204');
     }
 
+    //fonction DELETE pour supprimer 1 commentaire en utilisant son id
     public function delete(DestroyCommentRequest $request, $id)
     {
         $input = (object) $request->validated();

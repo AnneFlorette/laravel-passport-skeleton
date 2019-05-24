@@ -23,6 +23,7 @@ use App\Http\Requests\GetTicketCreatedByUserRequest;
 
 class TicketController extends BaseController
 {
+    //fonction pour GET 1 ticket en utilisant son id
     public function show($id)
     {
         $ticket = Ticket::findorfail($id);
@@ -31,6 +32,7 @@ class TicketController extends BaseController
         );
     }
 
+    //fonction pour GET tous les tickets
     public function index()
     {
         return response()->json(
@@ -38,6 +40,7 @@ class TicketController extends BaseController
         );
     }
 
+    //fonction POST pour ajouter 1 ticket
     public function create(CreateTicketRequest $request)
     {
         $input = (object) $request->validated();
@@ -59,6 +62,7 @@ class TicketController extends BaseController
 
     }
 
+    //fonction PUT pour modifier 1 ou plusieurs données d'un ticket en utilisant son id
     public function update(UpdateTicketRequest $request, $id)
     {
         $input = (object) $request->validated();
@@ -79,6 +83,7 @@ class TicketController extends BaseController
         return response(null, '204');
     }
 
+    //fonction DELETE pour supprimer 1 ticket en utilisant son id
     public function delete(DestroyTicketRequest $request, $id)
     {
         $input = (object) $request->validated();
@@ -88,6 +93,7 @@ class TicketController extends BaseController
         return response(null, '204');
     }
 
+    //fonction pour GET tous les tickets créer par un même utilisateur en utilisant son id
     public function listTicketCreatedByActualUser(GetTicketCreatedByUserRequest $request, $id){
         
         $input = (object) $request->validated();
@@ -97,7 +103,7 @@ class TicketController extends BaseController
         return $tickets;
     }
 
-
+    //fonction pour GET tous les commentaires assigné à un même utilisateur en utilisant son id
     public function listTicketAssignedByActualUser(GetTicketAssignedByUserRequest $request, $id){
 
         $input = (object) $request->validated();

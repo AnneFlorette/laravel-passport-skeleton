@@ -2,17 +2,17 @@
 
 use Illuminate\Database\Seeder;
 
-use App\User;
+use App\Ticket;
 
-class UserSeeder extends Seeder
+class TicketSeeder extends Seeder
 {
     /**
-     * Run App\User entity seeder
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        factory(User::class, 20)->create();
+        factory(Ticket::class, 5)->create();
     }
 }

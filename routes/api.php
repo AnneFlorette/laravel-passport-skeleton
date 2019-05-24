@@ -114,7 +114,7 @@ Route::middleware('auth:api')
 
     //Get users for actual ticket
 Route::middleware('auth:api')
-    ->get('/tickets/assigned/','TicketController@listTicketAssignedByActualUser')
+    ->get('/tickets/assigned','TicketController@listTicketAssignedByActualUser')
     ->name('api.ticket.getbyassigned');
 
 //--------------------------------------

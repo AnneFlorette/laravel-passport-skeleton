@@ -26,7 +26,7 @@ class UserController extends BaseController
     //fonction pour GET 1 utilisateur en utilisant son id
     public function show($id)
     {
-        $user = User::findorfail($id);
+        $user = User::findOrFail($id);
         return $user;
     }
 
@@ -56,7 +56,7 @@ class UserController extends BaseController
     public function update(UpdateUserRequest $request, $id)
     {
         $input = (object) $request->validated();
-        $user = User::findorfail($id);
+        $user = User::findOrFail($id);
 
             $user->name = $input->name;
             $user->email = $input->email;
@@ -69,7 +69,7 @@ class UserController extends BaseController
     public function delete(DestroyUserRequest $request, $id)
     {
         $input = (object) $request->validated();
-        $user = User::findorfail($id);
+        $user = User::findOrFail($id);
 
         $user->delete();
         return response(null, '204');
@@ -78,7 +78,7 @@ class UserController extends BaseController
     //fonction POST pour ajouter dans la base la date à laquelle le mail à été vérifier
     public function emailVerified($id)
     {
-        $user = User::findorfail($id);
+        $user = User::findOrFail($id);
 
         $user->email_verified_at = date('Y-m-d H:i:s');
         return response(null, '204');

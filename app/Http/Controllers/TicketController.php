@@ -26,7 +26,7 @@ class TicketController extends BaseController
     //fonction pour GET 1 ticket en utilisant son id
     public function show($id)
     {
-        $ticket = Ticket::findorfail($id);
+        $ticket = Ticket::findOrFail($id);
         return response()->json(
             $ticket
         );
@@ -66,7 +66,7 @@ class TicketController extends BaseController
     public function update(UpdateTicketRequest $request, $id)
     {
         $input = (object) $request->validated();
-        $ticket = Ticket::findorfail($id);
+        $ticket = Ticket::findOrFail($id);
 
         $ticket->title = $input->title;
         $ticket->priority = $input->priority;
@@ -87,7 +87,7 @@ class TicketController extends BaseController
     public function delete(DestroyTicketRequest $request, $id)
     {
         $input = (object) $request->validated();
-        $ticket = Ticket::findorfail($id);
+        $ticket = Ticket::findOrFail($id);
 
         $ticket->delete();
         return response(null, '204');

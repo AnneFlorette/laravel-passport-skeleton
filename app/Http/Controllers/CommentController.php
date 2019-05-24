@@ -22,7 +22,7 @@ class CommentController extends BaseController
     //fonction pour GET 1 commentaire en utilisant son id
     public function show($id)
     {
-        $comment = Comment::findorfail($id);
+        $comment = Comment::findOrFail($id);
         return response()->json([
             $comment
         ]);
@@ -53,7 +53,7 @@ class CommentController extends BaseController
     public function update(UpdateCommentRequest $request, $id)
     {
         $input = (object) $request->validated();
-        $comment = Comment::findorfail($id);
+        $comment = Comment::findOrFail($id);
 
         $comment->content = $input->content;
         $comment->save();
@@ -64,7 +64,7 @@ class CommentController extends BaseController
     public function delete(DestroyCommentRequest $request, $id)
     {
         $input = (object) $request->validated();
-        $comment = Comment::findorfail($id);
+        $comment = Comment::findOrFail($id);
 
         $comment->delete();
         return response(null, '204');

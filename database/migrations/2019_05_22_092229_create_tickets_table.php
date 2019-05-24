@@ -25,7 +25,7 @@ class CreateTicketsTable extends Migration
             $table->unsignedBigInteger('user_id'); //Definis la colonne comme non assignée
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); //Rend la colonne foreign key sur la table user avec une suppression si le user est supprimé
             $table->unsignedBigInteger('user_id_assigned')->nullable(); //Definis la colonne comme non assignée
-            $table->foreign('user_id_assigned')->references('id')->on('users')->onDelete('cascade'); //Rend la colonne foreign key sur la table user avec une suppression si le user est supprimé
+            $table->foreign('user_id_assigned')->references('id')->on('users')->onDelete('set null'); //Rend la colonne foreign key sur la table user avec une suppression si le user est supprimé
 
             $table->timestamps(); //created_at and updated_at
         });
